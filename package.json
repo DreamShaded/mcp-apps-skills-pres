@@ -1,0 +1,17 @@
+{
+  "name": "slidev-speech",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "dev:theme": "cd slidev-theme-vzhyx && npm run dev",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.6.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.22"
+  }
+}
