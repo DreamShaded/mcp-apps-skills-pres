@@ -1,0 +1,60 @@
+/* Глобальные стили колоды. Инжектятся в корень приложения (в отличие от <style> в слайде,
+   который Slidev автоматически скоупит). Селекторы под .slidev-layout, чтобы не течь в presenter UI. */
+
+/* тема по умолчанию даёт 14px для тела и кода — поднимаем до 16px (минимум доклада) */
+:root {
+  --font-regular-text-size: 1rem;
+}
+
+.slidev-layout .gnum {
+  font-weight: 800;
+  line-height: 1;
+  background: var(--color-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.slidev-layout .cl-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+}
+.slidev-layout .cl-head .gnum {
+  font-size: 4.5rem;
+}
+.slidev-layout .cl-head h2 {
+  margin: 0;
+}
+.slidev-layout .sub {
+  color: var(--white-sub);
+}
+.slidev-layout .accent {
+  color: var(--color-green);
+}
+.slidev-layout .cyan {
+  color: var(--color-cyan);
+}
+.slidev-layout .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+.slidev-layout .chip {
+  font-size: 1.35rem;
+  font-weight: 600;
+  padding: 0.6rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+.slidev-layout .card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+}
+.slidev-layout .repo {
+  margin-top: 1.4rem;
+  font-size: 1rem;
+  color: var(--white-sub);
+  letter-spacing: 0.02em;
+}
