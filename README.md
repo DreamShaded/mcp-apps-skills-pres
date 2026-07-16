@@ -1,11 +1,13 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+## TODO: 
+- без mcp 
+- mcp без ui 
+- mcp ui 
+- mcp ui + skill
+- как ходить по ним без переподключения и отключения
 
-To start the slide show:
 
-- `pnpm install`
-- `pnpm dev`
-- visit <http://localhost:3030>
+=============
+слайд 8 отрисуй диаграмму через div'ы покрасивее, и попробуй синхронизировать клик и появление следующего элемента и в схеме, и в списке. У схемы 3 клика, совпадают с первыми тремя элементами списка, затем схема не меняется, просто последний элемент списка.
 
-Edit the [slides.md](./slides.md) to see the changes.
+=============
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
