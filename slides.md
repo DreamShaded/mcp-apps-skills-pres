@@ -153,8 +153,8 @@ align: top
 
 <div class="qs">
   <div class="q" v-click="2">В каком порядке вызвать инструменты?</div>
-  <div class="q" v-click="4">Рейтинг — это критерий выбора?</div>
-  <div class="verdict" v-click="5">Схема отвечает на вопрос «что делает этот тул».</div>
+  <div class="q" v-click="3">Рейтинг — это критерий выбора?</div>
+  <div class="verdict" v-click="4">Схема отвечает на вопрос «что делает этот тул».</div>
 </div>
 
 <style scoped>
@@ -173,7 +173,8 @@ align: top
 
 [click] но без явных шаманств с промптингом или кастомным скиллом 
 
-[click] мы чаще всего получим просто выдачу одного из вызванных инструментов. Причём всё равно в текстовом формате - пользователь видит тупо текст и ссылку на внешний сервис. Можно ли лучше? Конечно! 
+[click] мы чаще всего получим просто выдачу одного из вызванных инструментов. 
+[click] Причём всё равно в текстовом формате - пользователь видит тупо текст и ссылку на внешний сервис. Можно ли лучше? Конечно! 
 
 -->
 
@@ -213,7 +214,6 @@ align: top
 
 [click] Рабочая группа Skills Over MCP формулирует это так: скиллы — это контекст, а MCP — протокол контекста. Агент уже ходит на сервер за тулами. За инструкцией он может ходить туда же.
 
-К этому слайду я вернусь в конце.
 -->
 
 ---
@@ -229,39 +229,123 @@ align: center
 
 ::default::
 
-<div v-click="1">
+<div class="flow">
 
-```mermaid
-flowchart LR
-    S["MCP-сервер<br/>тулы + ui://"] <-->|MCP| H["Host<br/>чат-клиент"]
-    H <-->|postMessage| V["View<br/>iframe"]
-```
+  <div class="node" :class="{ on: $clicks >= 1 && $clicks <= 2 }">
+    <div class="t">MCP-сервер</div>
+    <div class="s">тулы + <code>ui://</code></div>
+  </div>
+
+  <div class="edge" :class="{ on: $clicks >= 1 && $clicks <= 2 }">
+    <div class="wire"></div>
+    <div class="cap">
+      <div class="proto">MCP</div>
+      <div class="pay">
+        <span :class="{ vis: $clicks === 1 }">HTML-шаблон</span>
+        <span :class="{ vis: $clicks >= 2 }">вызов тула → результат</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="node" :class="{ on: $clicks >= 1 }">
+    <div class="t">Host</div>
+    <div class="s">чат-клиент</div>
+  </div>
+
+  <div class="edge" :class="{ on: $clicks >= 3 }">
+    <div class="wire"></div>
+    <div class="cap">
+      <div class="proto">postMessage</div>
+      <div class="pay">
+        <span :class="{ vis: $clicks >= 3 }">тема, размеры, аргументы</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="node" :class="{ on: $clicks >= 3 }">
+    <div class="t">View</div>
+    <div class="s">iframe</div>
+  </div>
 
 </div>
 
 ::right::
 
 <div class="phases">
-  <div class="ph" v-click="2"><span class="n">1</span><div><b>Подключение</b><br>хост забирает HTML-шаблон</div></div>
-  <div class="ph" v-click="3"><span class="n">2</span><div><b>Вызов</b><br>модель зовёт тул, сервер отдаёт результат</div></div>
-  <div class="ph" v-click="4"><span class="n">3</span><div><b>Рендер</b><br>iframe, тема, размеры, аргументы, результат</div></div>
-  <div class="ph" v-click="5"><span class="n">4</span><div><b>Интерактив</b><br>виджет зовёт тулы обратно через хост</div></div>
+  <div class="ph" v-click="1" :class="{ cur: $clicks === 1 }"><span class="n">1</span><div><b>Подключение</b><br>хост забирает HTML-шаблон</div></div>
+  <div class="ph" v-click="2" :class="{ cur: $clicks === 2 }"><span class="n">2</span><div><b>Вызов</b><br>модель зовёт тул, сервер отдаёт результат</div></div>
+  <div class="ph" v-click="3" :class="{ cur: $clicks === 3 }"><span class="n">3</span><div><b>Рендер</b><br>iframe, тема, размеры, аргументы, результат</div></div>
+  <div class="ph" v-click="4" :class="{ cur: $clicks === 4 }"><span class="n">4</span><div><b>Интерактив</b><br>виджет зовёт тулы обратно через хост</div></div>
 </div>
 
 <style scoped>
+.flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+.node {
+  width: 100%; max-width: 20rem; padding: 1rem 1.4rem; text-align: center;
+  border: 2px solid rgba(255,255,255,0.16); border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  opacity: 0.45; transition: all 0.35s ease;
+}
+.node.on {
+  opacity: 1; border-color: var(--color-cyan);
+  background: rgba(98,236,255,0.08);
+  box-shadow: 0 0 2rem rgba(98,236,255,0.18);
+}
+.node .t { font-size: 1.5rem; font-weight: 800; }
+.node.on .t { color: var(--color-cyan); }
+.node .s { margin-top: 0.2rem; font-size: 1.05rem; color: var(--white-sub); }
+.node .s code { background: transparent; font-size: 1.05rem; }
+
+/* подпись выведена из потока, иначе линия смещается от центра узлов */
+.edge { position: relative; display: flex; justify-content: center; width: 100%; max-width: 20rem; opacity: 0.35; transition: opacity 0.35s ease; }
+.edge.on { opacity: 1; }
+
+/* стрелка двусторонняя: линия + два треугольника через border-trick */
+.wire { position: relative; width: 2px; height: 3.4rem; background: rgba(255,255,255,0.3); }
+.edge.on .wire { background: var(--color-cyan); }
+.wire::before, .wire::after {
+  content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+}
+.wire::before { top: 0; border-bottom: 7px solid rgba(255,255,255,0.3); }
+.wire::after { bottom: 0; border-top: 7px solid rgba(255,255,255,0.3); }
+.edge.on .wire::before { border-bottom-color: var(--color-cyan); }
+.edge.on .wire::after { border-top-color: var(--color-cyan); }
+
+.cap { position: absolute; top: 50%; left: calc(50% + 1rem); transform: translateY(-50%); }
+.cap .proto { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; }
+.edge.on .cap .proto { color: var(--color-cyan); }
+/* оба payload-лейбла лежат в одной ячейке: переключение подписи не двигает схему */
+.pay { position: relative; height: 1.4rem; }
+.pay span {
+  position: absolute; left: 0; top: 0; white-space: nowrap;
+  font-size: 1rem; color: var(--white-sub);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.pay span.vis { opacity: 1; }
+
 .phases { display: flex; flex-direction: column; gap: 0.9rem; }
-.ph { display: flex; align-items: flex-start; gap: 1rem; font-size: 1.3rem; line-height: 1.35; }
+.ph {
+  display: flex; align-items: flex-start; gap: 1rem;
+  font-size: 1.3rem; line-height: 1.35;
+  padding: 0.5rem 0.7rem; border-radius: 10px;
+  border-left: 3px solid transparent;
+  transition: all 0.35s ease;
+}
+.ph.cur { border-left-color: var(--color-cyan); background: rgba(98,236,255,0.07); }
 .ph .n {
   flex: none; width: 2.2rem; height: 2.2rem; border-radius: 50%;
   display: grid; place-items: center; font-weight: 800; font-size: 1.2rem;
   background: var(--dark-blue); color: #fff;
+  transition: all 0.35s ease;
 }
+.ph.cur .n { background: var(--color-cyan); color: var(--black); }
 .ph b { font-size: 1.4rem; }
-:deep(.slidev-code) { font-size: 0.95rem; }
 </style>
 
 <!--
-Три участника. Сервер объявляет тулы и UI-ресурсы. Хост — это чат-клиент: он держит айфрейм песочницу и проксирует всё между сервером и виджетом. 
+У нас есть по сути ри участника. Сервер объявляет тулы и UI-ресурсы. Хост — это чат-клиент: он держит айфрейм песочницу и проксирует всё между сервером и виджетом. 
 
 Жизненный цикл в четыре фазы.
 
@@ -274,43 +358,6 @@ flowchart LR
 [click] Пользователь работает с виджетом. Виджет может позвать тул обратно, через хост. Перед тем как убрать виджет с экрана, хост его предупреждает: можно сохранить состояние.
 -->
 
----
-
-# UI-ресурс объявлен заранее
-
-<div class="chips gives" v-click="1">
-  <span class="chip">префетч</span>
-  <span class="chip">кеш</span>
-  <span class="chip">ревью HTML до исполнения</span>
-  <span class="chip">разметка ≠ данные</span>
-</div>
-
-<div class="rejected">
-  <div class="rej" v-click="2"><s>embedded resources</s><span>хост не успевает отревьюить HTML, кешировать нечего</span></div>
-  <div class="rej" v-click="3"><s>глобальный объект API</s><span>инъекция кода хоста в каждый фрейм; с внешними не работает</span></div>
-  <div class="rej" v-click="4"><s>внешние URL</s><span>модель не видит содержимое, ревью не провести</span></div>
-</div>
-
-<style scoped>
-.gives { margin-top: 1.4rem; }
-.gives .chip { background: rgba(86,255,113,0.08); border-color: rgba(86,255,113,0.4); }
-.rejected { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
-.rej { display: flex; align-items: baseline; gap: 1.4rem; }
-.rej s { font-size: 1.6rem; font-weight: 700; color: #ff8a8a; min-width: 16rem; }
-.rej span { font-size: 1.35rem; color: var(--white-sub); }
-</style>
-
-<!--
-Шаблон приезжает при подключении. [click] Хост может его закешировать, отревьюить и подготовить заранее. Статичная разметка не смешивается с динамическими данными: префетч, кеш, ревью HTML до исполнения.
-
-Три варианта авторы рассмотрели и отклонили. Это ответ на вопрос «почему не проще».
-
-[click] Первый: возвращать UI прямо в результате тула, как делает mcp-ui сегодня. Сервер писать удобнее, зато хост не успевает отревьюить HTML до исполнения, и кешировать нечего.
-
-[click] Второй: положить в iframe глобальный объект API. Отклонили: хосту пришлось бы инжектить свой код в каждый фрейм, а с внешними источниками это не работает.
-
-[click] Третий: разрешить внешние URL. Отложили: модель не видит содержимое такой страницы, скриншот не снять, ревью не провести. Могут вернуть отдельной capability.
--->
 
 ---
 
@@ -322,12 +369,10 @@ flowchart LR
     <div class="arm" v-click="2">
       <div class="pipe cyan"><code>content</code></div>
       <div class="dst">→ контекст модели</div>
-      <div class="det">три строки текста</div>
     </div>
     <div class="arm" v-click="3">
       <div class="pipe accent"><code>structuredContent</code></div>
       <div class="dst">→ виджет</div>
-      <div class="det">20 моделей · характеристики · остатки · сроки</div>
     </div>
   </div>
   <div class="payoff" v-click="4">Контекст не раздувается. Пользователь видит таблицу.</div>
@@ -347,18 +392,18 @@ flowchart LR
 </style>
 
 <!--
-[click] Результат тула едет двумя потоками.
+[click] Результат вызова в таком случае поедет к нам концептуально двумя потоками. У нас есть поля контент и стракчед контент, которые уже давно в спеке MCP, но в MCP Apps они немного иначе себя ведут.
 
-[click] content — текст, который попадает в контекст модели. Три строки.
+[click] content — текст, который попадает в контекст модели. 
 
-[click] structuredContent — данные, которые попадают в виджет. Двадцать моделей с характеристиками, вариантами, остатками по складам и сроками доставки.
+[click] structuredContent — данные, которые попадают в виджет. Двадцать моделей наушников с характеристиками, вариантами, остатками по складам и сроками доставки.
 
-[click] В магазине это развязывает главный узел. Пользователь видит таблицу и сравнивает. Модель получает три строки текста и не платит контекстом за то, чего ей знать не нужно.
+[click] В магазине это позволяет Пользователю показать короткое саммари и таблицу товаров, пользователь смотрит и сравнивает. Модель получает три строки текста и не платит контекстом за то, чего ей знать не нужно. В оригинале MCP требует, чтобы тул, возвращающий structuredContent, должен (SHOULD) продублировать те же данные сериализованным JSON в TextContent-блоке content, а при наличии обоих полей они должны быть семантически эквивалентны — одна информация в двух формах. Это осознанный асимметричный паттерн MCP Apps, и он расходится с требованием эквивалентности. Работает он ровно потому, что настоящий потребитель полных данных — виджет, а не модель. Формально это отступление от гайдлайнов обратной совмести, и вокруг этого нюанса до сих пор идёт спор 
 -->
 
 ---
 
-# Обратный канал и visibility
+# Что под капотом
 
 <div class="chan" v-click="1">виджет &nbsp;→&nbsp; хост &nbsp;→&nbsp; сервер <span class="s">· JSON-RPC 2.0 поверх postMessage</span></div>
 
@@ -366,12 +411,6 @@ flowchart LR
 
 <div class="vis" v-click="3"><code>"visibility": ["model", "app"]</code><span>по умолчанию</span></div>
 <div class="vis hi" v-click="4"><code>"visibility": ["app"]</code><span>модель тул не видит вообще</span></div>
-
-<div class="chips ex" v-click="5">
-  <span class="chip">обновить срок</span>
-  <span class="chip">пагинация</span>
-  <span class="chip">переключение варианта</span>
-</div>
 
 <style scoped>
 .chan { margin-top: 1.2rem; font-size: 1.8rem; font-weight: 700; }
@@ -385,15 +424,12 @@ flowchart LR
 </style>
 
 <!--
-[click] Виджет говорит с хостом через JSON-RPC поверх postMessage. Свой формат сообщений авторы не изобретали: типы tool, prompt, intent из mcp-ui свели к подмножеству обычного JSON-RPC.
+[click] Виджет говорит с хостом через JSON-RPC поверх postMessage. Свой формат сообщений авторы не изобретали, это всё JSON-RPC. Хост — это вахтёр. Виджет (картинка в чате) хочет что-то у сервера, но сам внутрь не заходит: подходит к вахтёру и просит. 
 
-[click] Каждый вызов из виджета логируется, проходит через хост, и хост может потребовать подтверждения у пользователя. Дальше деталь, которую мало кто знает. У тула есть поле visibility.
+[click] Вахтёр записывает просьбу в журнал и, если дело серьёзное, переспрашивает пользователя «точно?». 
 
-[click] По умолчанию оба значения — model и app.
+[click] Каждый вызов из виджета логируется, проходит через хост, и хост может потребовать подтверждения у пользователя. У тула есть поле visibility. [click] А visibility — это список, кому вообще можно подходить к конкретной кнопке: обычно и ИИ, и человеку; но можно оставить кнопку только человеку, и тогда ИИ про неё даже не знает.
 
-[click] Если поставить только app, модель этот тул не увидит вообще.
-
-[click] Кнопка «обновить срок доставки», пагинация, переключение варианта: виджет зовёт эти тулы сам, контекст модели остаётся чистым.
 -->
 
 ---
