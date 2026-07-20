@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "slidev build",
-    "dev": "slidev --open",
+    "dev": "slidev --open --remote --bind 127.0.0.1",
     "dev:theme": "cd slidev-theme-vzhyx && npm run dev",
     "export": "slidev export"
   },
