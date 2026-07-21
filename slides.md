@@ -466,7 +466,6 @@ align: center
 
 [click] Всё вместе. Внутри iframe обычный HTML. Тему и размеры контейнера хост отдаст сам при инициализации.
 
-Свериться перед докладом. mimeType — text/html;profile=mcp-app; в ноябрьском анонсе был text/html+mcp. _meta — вложенный объект; в ноябре был плоский ключ ui/resourceUri. Источник истины: modelcontextprotocol/ext-apps, каталог 2026-01-26. В статусе release candidate висит спека 2026-07-28.
 -->
 
 ---
