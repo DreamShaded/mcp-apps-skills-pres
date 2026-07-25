@@ -254,13 +254,33 @@ align: center
 layout: interjection
 variant: 5
 transition: fade
+class: demo-fullbleed
 ---
 
-<TextBig>Демо ui://</TextBig>
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
 
+<video
+  :src="base + 'videos/demo-3.mp4'"
+  class="demo-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  controls
+/>
 
 <style scoped>
-.cue { margin-top: 1.6rem; font-size: 1.5rem; color: var(--white-sub); }
+/* Видео на весь слайд: абсолют перекрывает паддинги темы и фон-подложку */
+.demo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
 </style>
 
 <!--
