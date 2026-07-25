@@ -58,3 +58,8 @@
   color: var(--white-sub);
   letter-spacing: 0.02em;
 }
+
+/* Слайд с видео-демо: убираем паддинги темы, чтобы видео шло от края до края */
+.slidev-layout.demo-fullbleed {
+  padding: 0;
+}

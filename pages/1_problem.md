@@ -2,9 +2,34 @@
 layout: interjection
 variant: 4
 transition: fade
+class: demo-fullbleed
 ---
 
-<TextBig>Демо</TextBig>
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
+<video
+  :src="base + 'videos/demo-1.mp4'"
+  class="demo-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  controls
+/>
+
+<style scoped>
+/* Видео на весь слайд: абсолют перекрывает паддинги темы и фон-подложку */
+.demo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+</style>
 
 <!--
 а пока мне бы хотелось поговорить о таких забавных вещах, которые происходят в вебе. 
