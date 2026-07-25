@@ -1,7 +1,11 @@
 node_modules
 .DS_Store
 dist
+dist-cibuild
 *.local
 .vite-inspect
 .remote-assets
 components.d.ts
+
+# Локальные демо-записи, в деплой не идут
+public/видео/

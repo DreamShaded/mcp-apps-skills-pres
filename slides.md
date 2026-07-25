@@ -1,5 +1,5 @@
 ---
-theme: ../slidev-theme-sber
+theme: ./slidev-theme-sber
 highlighter: shiki
 lineNumbers: false
 colorSchema: dark

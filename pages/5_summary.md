@@ -132,13 +132,41 @@ transition: slide-up
 align: center
 ---
 
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
 ::default::
-<img :src="'/images/slides/my_qr.png'" class="h-80 rounded-xl shadow-lg border border-main mx-auto mt-4" />
+<img :src="base + 'images/slides/my_qr.png'" class="h-80 rounded-xl shadow-lg border border-main mx-auto mt-4" />
 
 ::right::
 <TextBig>
   Спасибо
 </TextBig>
+
+<!--
+
+-->
+
+---
+layout: two-cols
+variant: 4
+leftWidth: 60%
+transition: slide-up
+align: center
+---
+
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
+::default::
+<TextBig>
+  Оставьте обратную связь!)
+</TextBig>
+
+::right::
+<img :src="base + 'images/slides/feedback_qr.svg'" class="h-80 drop-shadow-2xl mx-auto" />
 
 <!--
 
