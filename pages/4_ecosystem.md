@@ -73,37 +73,6 @@ variant: 11
 -->
 
 ---
-
-# Спор про скиллы
-
-<div class="debate">
-  <div class="col" v-click="1"><div class="sep cyan">SEP-2076</div><div>первоклассный примитив · skills/list · skills/get · свои capabilities</div></div>
-  <div class="arg" v-click="2">за: ресурсы application-controlled, а скилл model-controlled по природе</div>
-  <div class="col" v-click="3"><div class="sep accent">SEP-2640</div><div>расширение поверх Resources · ядро протокола не трогаем</div></div>
-  <div class="win" v-click="4">победила вторая линия · PR-2076 закрыт</div>
-</div>
-
-<style scoped>
-.debate { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 1rem; }
-.col { padding: 1rem 1.3rem; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; background: rgba(255,255,255,0.04); font-size: 1.4rem; }
-.sep { font-size: 1.6rem; font-weight: 800; }
-.arg { font-size: 1.35rem; color: var(--white-sub); padding-left: 1.3rem; }
-.win { font-size: 1.55rem; font-weight: 700; }
-.cost { font-size: 1.5rem; font-weight: 700; color: var(--color-green); }
-</style>
-
-<!--
-Со скиллами история другая, в ней был настоящий спор. Расскажу, потому что он объясняет, почему у скиллов до сих пор шероховато.
-
-[click]  «Agent Skills as a First-Class MCP Primitive». Предлагал сделать скилл отдельным примитивом протокола рядом с tool/prompt/resource, со своими методами skills/list, skills/get, своей capability и уведомлением list_changed. Плюсы — чистая capability-негоциация и отдельные нотификации. 
-
-[click] Аргумент был сильный. Ресурсы в MCP по умолчанию application-controlled: решение прочитать принимает хост. А скилл, который учит агента оркестрировать тулы, по природе model-controlled — агент должен сам решить, что ему нужна инструкция.
-
-[click] Победила другая линия, «Skills Extension»: расширение поверх Resources. Ядро протокола не трогаем, любой существующий сервер апгрейдится за вечер. скилл раздаётся через уже существующий примитив Resources под схемой skill://, каждый файл скилла — обычный ресурс. Директорийная модель сохраняется, хост, который уже умеет читать ресурсы как виртуальную файловую систему, потребляет скиллы тем же кодом. Это текущее направление рабочей группы Skills Over MCP.
-
--->
-
----
 layout: two-cols
 variant: 11
 leftWidth: 44%
