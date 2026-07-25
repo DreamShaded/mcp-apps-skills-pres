@@ -81,17 +81,35 @@ list_variants
 -->
 
 ---
+layout: simple-slide
+variant: 11
+class: demo-fullbleed
+---
 
-# С MCP
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
+<video
+  :src="base + 'videos/demo-2.mp4'"
+  class="demo-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  controls
+/>
 
 <style scoped>
-.log { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 0.8rem; }
-.line { font-size: 1.5rem; padding: 0.7rem 1.1rem; background: rgba(255,255,255,0.04); border-left: 3px solid rgba(255,255,255,0.2); }
-.line .who { display: inline-block; min-width: 5.5rem; color: var(--white-sub); }
-.line .call { color: var(--color-cyan); font-weight: 700; }
-.line.bad { border-left-color: #ff5a5a; color: #ff9a9a; }
-.line.bad b { color: #ff5a5a; }
-.verdict { margin-top: 1.8rem; font-size: 2rem; font-weight: 800; }
+/* Видео на весь слайд: абсолют перекрывает паддинги темы и фон-подложку */
+.demo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
 </style>
 
 <!--
