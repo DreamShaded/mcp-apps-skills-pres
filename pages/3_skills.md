@@ -1,4 +1,22 @@
 ---
+layout: interjection
+variant: 6
+transition: fade
+---
+
+<TextBig>Skills Over MCP</TextBig>
+
+<div class="bridge">скиллы — про управление контекстом, MCP — протокол контекста</div>
+
+<style scoped>
+.bridge { margin-top: 1.4rem; font-size: 1.6rem; color: var(--white-sub); max-width: 42rem; }
+</style>
+
+<!--
+От ui:// — интерфейса для человека — переходим ко второму ресурсу, skill://: это инструкция для агента. Рабочая группа Skills Over MCP формулирует это так: скиллы — про управление контекстом, а MCP — протокол контекста. Агент уже ходит на сервер за тулами; за инструкцией он может ходить туда же.
+-->
+
+---
 layout: simple-slide
 variant: 11
 ---
