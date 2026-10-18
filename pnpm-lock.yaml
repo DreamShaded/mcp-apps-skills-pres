@@ -21,6 +21,16 @@ importers:
         specifier: ^3.5.22
         version: 3.5.39(typescript@6.0.3)
 
+  slidev-theme-sber:
+    dependencies:
+      '@slidev/types':
+        specifier: ^52.6.0
+        version: 52.17.0(@nuxt/kit@3.21.8)(@vue/compiler-sfc@3.5.39)(rolldown@1.1.5)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.4(@types/node@22.20.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))
+    devDependencies:
+      '@slidev/cli':
+        specifier: ^52.6.0
+        version: 52.17.0(@nuxt/kit@3.21.8)(@types/markdown-it@14.1.2)(@types/node@22.20.1)(@vue/compiler-sfc@3.5.39)(lightningcss@1.32.0)(markdown-it@14.3.0)(postcss@8.5.17)(rolldown@1.1.5)(rollup@4.62.2)(terser@5.49.0)(workbox-build@7.4.1)(workbox-window@7.4.1)
+
 packages:
 
   '@antfu/install-pkg@1.1.0':
@@ -4059,8 +4069,8 @@ packages:
     resolution: {integrity: sha512-RQsvleCbF8cVHEv+xuDGaA4pOizFqJ0GgjtMSRo6oP8pnN7WsigHgVGey6aILRBKv4W2YOMHLqbKdnB6hpB9fw==}
     engines: {node: '>=20.0.0'}
 
-  source-map-js@1.2.1:
-    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
+  source-map-js@1.2.2:
+    resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
     engines: {node: '>=0.10.0'}
 
   source-map-support@0.5.21:
@@ -6225,7 +6235,7 @@ snapshots:
       semver: 7.8.5
       shiki: 4.3.1
       sirv: 3.0.2
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
       typescript: 6.0.3
       unhead: 3.1.8(rolldown@1.1.5)(rollup@4.62.2)(vite@8.1.4(@types/node@22.20.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))
       unocss: 66.7.5(vite@8.1.4(@types/node@22.20.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))
@@ -6924,7 +6934,7 @@ snapshots:
       '@vue/shared': 3.5.39
       entities: 7.0.1
       estree-walker: 2.0.2
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   '@vue/compiler-dom@3.5.39':
     dependencies:
@@ -6941,7 +6951,7 @@ snapshots:
       estree-walker: 2.0.2
       magic-string: 0.30.21
       postcss: 8.5.17
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   '@vue/compiler-ssr@3.5.39':
     dependencies:
@@ -7345,7 +7355,7 @@ snapshots:
   css-tree@3.2.1:
     dependencies:
       mdn-data: 2.27.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   cssesc@3.0.0: {}
 
@@ -9178,7 +9188,7 @@ snapshots:
     dependencies:
       nanoid: 3.3.16
       picocolors: 1.1.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   powershell-utils@0.1.0: {}
 
@@ -9561,7 +9571,7 @@ snapshots:
 
   smob@1.6.2: {}
 
-  source-map-js@1.2.1: {}
+  source-map-js@1.2.2: {}
 
   source-map-support@0.5.21:
     dependencies:
